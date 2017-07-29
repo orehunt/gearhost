@@ -1,0 +1,7 @@
+#!/bin/sh
+
+pkill -f node 
+nohup node run.js &>/var/log/ssh &
+
+sleep 1
+

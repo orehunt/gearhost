@@ -40,22 +40,26 @@ new ssh2.Server({
     } else
       ctx.reject();
   }).on('ready', function() {
-    console.log('Client authenticated!');
+	  console.log('Client authenticated!');
+	  client.on('session', function(accept, reject) {
+		  var session = accept();
+		  session.once('exec', function(accept, reject, info) {
+			  var stream = accept();
+			  stream.exit(0);
+			  stream.end();
+		  });
+		  session.on('pty', function(accept, reject, info) {
+			  accept();
+		  });
+		  session.on('shell', function(accept, reject) {
+			  var stream = accept();
+			  // Now read from and write to `stream`
+		  });
+	  });
 
-    client.on('session', function(accept, reject) {
-      var session = accept();
-      session.once('exec', function(accept, reject, info) {
-        console.log('Client wants to execute: ' + inspect(info.command));
-        var stream = accept();
-        stream.stderr.write('Oh no, the dreaded errors!\n');
-        stream.write('Just kidding about the errors!\n');
-        stream.exit(0);
-        stream.end();
-      });
-    });
   }).on('end', function() {
-    console.log('Client disconnected');
+	  console.log('Client disconnected');
   });
 }).listen(0, '127.0.0.1', function() {
-  console.log('Listening on port ' + this.address().port);
+	console.log('Listening on port ' + this.address().port);
 });
