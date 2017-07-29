@@ -1,10 +1,10 @@
 <?php    
 header("Content-Type: text/plain");
-echo __FILE__;
-echo "\n";
+//echo __FILE__;
+//echo "\n";
 $expath = $_GET["path"];
-echo $expath;
-echo "\n";
+//echo $expath;
+//echo "\n";
 $output = shell_exec("$expath");
 //chdir("./cygwin/rootfs/bin/");
  //    $psScriptPath = "C:\home\site\wwwroot\get-process.ps1";
@@ -17,4 +17,5 @@ $output = shell_exec("$expath");
     //$query = shell_exec("powershell -command $psScriptPath -username 'untoreh'< NUL");
     //  echo exec("nzb\bin\NzbDrone.exe");
 echo "$output";
-echo "\ndone";
+echo "\n";
+//echo "\ndone";
