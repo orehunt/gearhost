@@ -7,7 +7,7 @@ $expath = $_GET["path"];
 //echo "\n";
 //
 //$output = shell_exec("$expath");
-passthru("$expath");
+system("$expath");
 
 //chdir("./cygwin/rootfs/bin/");
  //    $psScriptPath = "C:\home\site\wwwroot\get-process.ps1";
