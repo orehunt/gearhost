@@ -5,7 +5,10 @@ header("Content-Type: text/plain");
 $expath = $_GET["path"];
 //echo $expath;
 //echo "\n";
-$output = shell_exec("$expath");
+//
+//$output = shell_exec("$expath");
+passthru("$expath");
+
 //chdir("./cygwin/rootfs/bin/");
  //    $psScriptPath = "C:\home\site\wwwroot\get-process.ps1";
   //   $query = shell_exec("C:\home\site\wwwroot\cygwin\rootfs\bin\ssh-host-config -y");
@@ -16,6 +19,6 @@ $output = shell_exec("$expath");
     // Execute the PowerShell script, passing the parameters:
     //$query = shell_exec("powershell -command $psScriptPath -username 'untoreh'< NUL");
     //  echo exec("nzb\bin\NzbDrone.exe");
-echo "$output";
+//echo "$output";
 echo "\n";
 //echo "\ndone";
