@@ -1,55 +1,22 @@
-{
-"servers": [{
-    "ssh": {
-                "host": "127.0.0.1",
-                "port": 22,
-                "username": "user",
-                "password": "password",
-                "debug": true
-            }
-]}
+var Client = require('ssh2').Client;
 
-var promptSSH = function (server, command) {
-    var conn = new ssh();
-    var deferred = Q.defer();
-
-    if (server.debug === true) {
-        server.debug = function(output) {
-            console.log(output);
-        }
-    }
-
-    conn.on('ready', function() {
-        conn.shell(function(error, stream) {
-            var body = '';
-
-            if (error) {
-                deferred.reject(error);
-            }
-            stream.on('data', function(data) {
-                body += data;
-            })
-            stream.on('close', function () {
-                conn.end();
-                return deferred.resolve(body);
-            })
-            .stderr.on('data', function(data) {
-                body += 'STDERR: ' + data;
-                conn.end();
-                return deferred.reject(new Error(body));
-            })
-            stream.write(command);
-        });
-    })
-    .connect(server);
-    return deferred.promise;
-};
-
-    it('debugging SSH2 Streams', function(done) {
-        functions.promptSSH(config.servers[0].ssh, 'ls -al\nexit\n')
-        .then(function (body) {
-            done();
-        })
-        .fail(done);
+var conn = new Client();
+conn.on('ready', function() {
+  console.log('Client :: ready');
+  conn.exec('uptime', function(err, stream) {
+    if (err) throw err;
+    stream.on('close', function(code, signal) {
+      console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
+      conn.end();
+    }).on('data', function(data) {
+      console.log('STDOUT: ' + data);
+    }).stderr.on('data', function(data) {
+      console.log('STDERR: ' + data);
     });
-}
+  });
+}).connect({
+  host: '127.0.0.1',
+  port: 12346,
+  username: 'root',
+  privateKey: require('fs').readFileSync('user')
+});

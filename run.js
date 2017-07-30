@@ -1,7 +1,7 @@
 var fs = require('fs');
 var crypto = require('crypto');
 var inspect = require('util').inspect;
-
+var spawn = require('child_process').spawn;
 var buffersEqual = require('buffer-equal-constant-time');
 var ssh2 = require('ssh2');
 var utils = ssh2.utils;
@@ -44,17 +44,45 @@ new ssh2.Server({
 	  client.on('session', function(accept, reject) {
 		  var session = accept();
 		  session.once('exec', function(accept, reject, info) {
-			  var stream = accept();
-			  stream.exit(0);
-			  stream.end();
+			  var channel = accept();
+			  const exc = spawn(info.command, {shell: true});
+			  channel.stdin.pipe(exc.stdin);
+			  exc.stdout.pipe(channel.stdout);
+			  exc.stderr.pipe(channel.stderr);
+			  exc.on('close', function(code, signal) {
+				  channel.close();
+				  console.log(`exc exited with code ${code} and signal ${signal}`);
+			  }).on('exit', function(code, signal) {
+				  channel.exit(code, signal);
+			  });
 		  });
 		  session.on('pty', function(accept, reject, info) {
 			  accept();
 		  });
 		  session.on('shell', function(accept, reject) {
-			  var stream = accept();
-			  // Now read from and write to `stream`
+			  var channel = accept();
+			  var exc = spawn('/bin/sh', ['-l'], {
+			  });
+			  channel.stdin.pipe(exc.stdin);
+			  exc.stdout.pipe(channel.stdout);
+			  exc.stderr.pipe(channel.stderr);
+			  channel.on('close', function(code, signal) {
+				  exc.close();
+				  console.log(`exc exited with code ${code} and signal ${signal}`);
+			  }).on('exit', function(code, signal) {
+				  exc.exit(code, signal);
+			  });
+			  exc.on('close', function(code, signal) {
+				  channel.close();
+				  console.log(`exc exited with code ${code} and signal ${signal}`);
+			  }).on('exit', function(code, signal) {
+				  channel.exit(code, signal);
+			  });
+			  client.on('end', function() {
+				  exc.kill('SIGINT');
+			  });
 		  });
+		  
 	  });
 
   }).on('end', function() {
