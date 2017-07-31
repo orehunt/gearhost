@@ -4,7 +4,8 @@
   "description": "",
   "main": "run.js",
   "dependencies": {
-    "ssh2": "^0.5.5"
+    "ssh2": "^0.5.5",
+    "expressjs": "masteR"
   },
   "devDependencies": {},
   "scripts": {
