@@ -8,10 +8,10 @@ var utils = ssh2.utils;
 var stringArgv = require('string-argv');
 var isWin = /^win/.test(process.platform);
 
-var pubKey = utils.genPublicKey(utils.parseKey(fs.readFileSync('user.pub')));
+var pubKey = utils.genPublicKey(utils.parseKey(fs.readFileSync('ssh2/user.pub')));
 
 new ssh2.Server({
-  hostKeys: [fs.readFileSync('host.key')]
+  hostKeys: [fs.readFileSync('ssh2/host.key')]
 }, function(client) {
   console.log('Client connected!');
 	var procs = [];
