@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "ssh2": "^0.5.5",
-    "express": "^1.0.1"
+    "express": "latest"
   },
   "devDependencies": {},
   "scripts": {
