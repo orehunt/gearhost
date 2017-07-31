@@ -1,10 +1,10 @@
 var express = require('express');
 var app = express();
-
-app.use(express.static('.'));
+var port = process.env.PORT || '3000';
+// app.use(express.static('.'));
 app.get('/', function(req, res){
   res.send('id: ' + req.query.id);
 });
-app.listen(0, '0.0.0.0', function() {
+app.listen(port, function() {
 	console.log('Listening on port ' + this.address().port);
 });
