@@ -88,3 +88,15 @@ new ssh2.Server({
 }).listen(12346, '127.0.0.1', function() {
 	console.log('Listening on port ' + this.address().port);
 });
+
+var express = require('express');
+var app = express();
+
+app.get('/', function(req, res){
+  res.send('id: ' + req.query.id);
+});
+
+app.listen(80, '127.0.0.1', function() {
+	console.log('Listening on port ' + this.address().port);
+});
+
