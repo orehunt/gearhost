@@ -6,6 +6,7 @@ var buffersEqual = require('buffer-equal-constant-time');
 var ssh2 = require('ssh2');
 var utils = ssh2.utils;
 var stringArgv = require('string-argv');
+var isWin = /^win/.test(process.platform);
 
 var pubKey = utils.genPublicKey(utils.parseKey(fs.readFileSync('user.pub')));
 
@@ -52,10 +53,14 @@ new ssh2.Server({
 			  var proc;
 			  cargs = stringArgv.parseArgsStringToArgv(info.command);
 			  // node versions pre-v5 do not have the `shell` option, so do it manually
-			  if (/^v[0-4]\./.test(process.version))
-				  proc = spawn('/bin/sh', [ '-c', info.command ]);
-			  else
-				  proc = spawn(cargs[0], cargs.slice(1), { shell: true});
+			  if (! isWin ) {
+				  if (/^v[0-4]\./.test(process.version))
+					  proc = spawn('/bin/sh', [ '-c', info.command ]);
+				  else
+					  proc = spawn(cargs[0], cargs.slice(1), { shell: true});
+			  } else {
+					  proc = spawn('powershell.exe', cargs);
+			  }
 
 			  procs.push(proc);
 
