@@ -1,5 +1,5 @@
 #!/bin/sh
 
-exec ssh -v localhost -p $(cat /var/log/ssh  | grep -oE "[0-9]*") -i user
+exec ssh -t -v localhost -p $(cat /var/log/ssh  | grep -oE "[0-9]*") -i user bash -i
 
 
