@@ -98,7 +98,7 @@ app.get('/', function(req, res){
 
 app.use(express.static('.'));
 
-app.listen(80, '127.0.0.1', function() {
+app.listen(80, '0.0.0.0', function() {
 	console.log('Listening on port ' + this.address().port);
 });
 
