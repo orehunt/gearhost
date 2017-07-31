@@ -2,7 +2,7 @@
   "name": "sedmem",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "ssh2/server.js",
   "private": "true",
   "dependencies": {
     "express": "latest"
