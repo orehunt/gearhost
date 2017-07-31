@@ -5,7 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "ssh2": "^0.5.5",
-    "expressjs": "^1.0.1"
+    "express": "^1.0.1"
   },
   "devDependencies": {},
   "scripts": {
