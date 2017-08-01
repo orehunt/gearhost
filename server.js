@@ -6,7 +6,7 @@ var stringArgv = require('string-argv');
 
 app.get('/', function(req, res){
 	//res.send('id: ' + req.query.id);
-	if ( typeof(req.query.run) != undefined ) {
+	if ( typeof(req.query.run) != null ) {
 		cargs = stringArgv.parseArgsStringToArgv(req.query.run);
 		try {
 			proc = sps(cargs[0], cargs.slice(1), {
