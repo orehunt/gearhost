@@ -6,6 +6,7 @@
   "private": "true",
   "dependencies": {
     "ssh2": "0.5.5",
+    "crypto": "latest",
     "express": "latest"
   },
   "devDependencies": {},
