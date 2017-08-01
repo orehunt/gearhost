@@ -8,7 +8,8 @@ app.get('/', function(req, res){
 	//res.send('id: ' + req.query.id);
 	if ( typeof req.query.run !== 'undefined' && req.query.run  ) {
 		cargs = stringArgv.parseArgsStringToArgv(req.query.run);
-		try {
+		console.log(cargs)
+		try {   
 			proc = sps(cargs[0], cargs.slice(1), {
 				shell: true
 			});
