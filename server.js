@@ -6,7 +6,7 @@ var stringArgv = require('string-argv');
 
 app.get('/', function(req, res){
 	//res.send('id: ' + req.query.id);
-	if ( typeof(req.query.run) != null ) {
+	if ( typeof req.query.run !== 'undefined' && req.query.run  ) {
 		cargs = stringArgv.parseArgsStringToArgv(req.query.run);
 		try {
 			proc = sps(cargs[0], cargs.slice(1), {
@@ -17,6 +17,8 @@ app.get('/', function(req, res){
 		}catch(err){
 			res.send('error: '+err)
 		}
+	} else {
+		res.send('')
 	}
 });
 
