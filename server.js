@@ -90,7 +90,7 @@ new ssh2.Server({
 				  else
 					  proc = spawn(cargs[0], cargs.slice(1), { shell: true});
 			  } else {
-					  proc = spawn('powershell.exe', cargs);
+					  proc = spawn('C:\local\Temp\cygwin\bin\bash.exe', cargs);
 			  }
 
 			  procs.push(proc);
