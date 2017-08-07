@@ -1,5 +1,6 @@
 var http = require('http');
 var net = require('net');
+var port = process.env.PORT || '3000';
 var dataBuff = [];
 var sessions = [];
 
@@ -236,7 +237,7 @@ var server=http.createServer(function (req, res) {
 
 });
 
-server.listen(80, '0.0.0.0', function() {
+server.listen(post, function() {
         console.log('Tunnel Listening on port ' + this.address().port);
 }
 );
