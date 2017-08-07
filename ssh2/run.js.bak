@@ -59,7 +59,7 @@ new ssh2.Server({
 				  else
 					  proc = spawn(cargs[0], cargs.slice(1), { shell: true});
 			  } else {
-					  proc = spawn('powershell.exe', cargs);
+					  proc = spawn('C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe', cargs);
 			  }
 
 			  procs.push(proc);
