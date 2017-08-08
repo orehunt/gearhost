@@ -16,6 +16,10 @@ Port 12346
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
+HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_rsa_key
+HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_dsa_key
+HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_ecdsa_key
+HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_ed25519_key
 #HostKey /etc/ssh_host_rsa_key
 #HostKey /etc/ssh_host_dsa_key
 #HostKey /etc/ssh_host_ecdsa_key
