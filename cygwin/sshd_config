@@ -17,8 +17,8 @@ Port 12346
 #ListenAddress 0.0.0.0
 #ListenAddress ::
 HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_rsa_key
-HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_dsa_key
-HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_ecdsa_key
+#HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_dsa_key
+#HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_ecdsa_key
 #HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_ed25519_key
 #HostKey /etc/ssh_host_rsa_key
 #HostKey /etc/ssh_host_dsa_key
@@ -46,7 +46,7 @@ StrictModes no
 # but this is overridden so installations will only check .ssh/authorized_keys
 RSAAuthentication yes
 PubkeyAuthentication yes
-AuthorizedKeysFile /cygdrive/c/home/site/wwwroot/cygwin/authorized_keys
+#AuthorizedKeysFile /cygdrive/c/home/site/wwwroot/cygwin/authorized_keys
 
 #AuthorizedPrincipalsFile none
 
