@@ -35,7 +35,7 @@ HostKey /cygdrive/c/home/site/wwwroot/cygwin/ssh_host_ecdsa_key
 # Authentication:
 
 #LoginGraceTime 2m
-#PermitRootLogin prohibit-password
+PermitRootLogin yes
 StrictModes no
 #MaxAuthTries 6
 #MaxSessions 10
@@ -45,8 +45,7 @@ StrictModes no
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
 # but this is overridden so installations will only check .ssh/authorized_keys
 
-#AuthorizedKeysFile /cygdrive/c/home/site/wwwroot/cygwin/authorized_keys
-AuthorizedKeysFile /home/.ssh/authorized_keys
+AuthorizedKeysFile /cygdrive/c/home/site/wwwroot/cygwin/authorized_keys
 
 #AuthorizedPrincipalsFile none
 
@@ -100,14 +99,14 @@ PermitEmptyPasswords yes
 #PrintLastLog yes
 #TCPKeepAlive yes
 #UseLogin no
-#PermitUserEnvironment no
+PermitUserEnvironment yes
 #Compression delayed
 #ClientAliveInterval 0
 #ClientAliveCountMax 3
 #UseDNS no
 #PidFile /var/run/sshd.pid
 #MaxStartups 10:30:100
-#PermitTunnel no
+PermitTunnel yes
 #ChrootDirectory none
 #VersionAddendum none
 
